@@ -1,11 +1,10 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_nodes - Binary ağacın ən azı 1 uşağı olan node-larını sayır
- * @tree: Sayılacaq ağacın kökü
+ * binary_tree_nodes - Counts the nodes with at least 1 child in a binary tree
+ * @tree: Pointer to the root node of the tree to count the number of nodes
  *
- * Return: Ağacdakı ən azı bir uşağı olan node-ların sayı
- *         (Əgər tree == NULL, 0 qaytarır)
+ * Return: Number of nodes with at least 1 child, or 0 if tree is NULL
  */
 size_t binary_tree_nodes(const binary_tree_t *tree)
 {
@@ -17,8 +16,6 @@ size_t binary_tree_nodes(const binary_tree_t *tree)
 	if (tree->left != NULL || tree->right != NULL)
 		count = 1;
 
-	count += binary_tree_nodes(tree->left);
-	count += binary_tree_nodes(tree->right);
-
-	return (count);
+	return (count + binary_tree_nodes(tree->left) +
+		binary_tree_nodes(tree->right));
 }
